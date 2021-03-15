@@ -19,6 +19,10 @@
     <string name="ban">Тут міг бути пост юзера %1$d, але він забанений</string>
     <string name="warning">З попередженням</string>
 
+    <string name="bad_word_adv">реклама</string>
+    <string name="bad_word_product">товар</string>
+    <string name="bad_word_buy">куплю</string>
+
     <string-array name="forbidden_words">
         <item>куплю</item>
         <item>товар</item>
