@@ -10,11 +10,10 @@ class DataToDomainMapper @Inject constructor(
     private val userStateConditions: UserStateConditions
 ) {
 
-
-    fun map(responses: List<PostData>?): List<PostDomainModel>? {
+    fun map(responses: List<PostData>): List<PostDomainModel> {
         val blackList = userStateConditions.getBlackList()
         return responses.let { posts ->
-            posts?.map { post ->
+            posts.map { post ->
                 val userState: UserState? = blackList
                     .find { it.userId == post.userId }
                     ?.userState

@@ -20,13 +20,12 @@ class PostsInfoRepository @Inject constructor(
     private val postResponseToPostDbEntityMapper: PostResponseToPostDbEntityMapper
 ) {
 
-    suspend fun getPostsFromLocalStorage(): List<PostDomainModel>? = withContext(Dispatchers.IO) {
+    suspend fun getPostsFromLocalStorage(): List<PostDomainModel> = withContext(Dispatchers.IO) {
         val posts = dao.getAllUsersFromDB()
         if (posts.isEmpty()){
             dao.insertAll(postResponseToPostDbEntityMapper.map(api.getPostsList()))
             dao.getAllUsersFromDB()
         }
-        posts
         dataToDomainMapper.map(posts)
     }
 

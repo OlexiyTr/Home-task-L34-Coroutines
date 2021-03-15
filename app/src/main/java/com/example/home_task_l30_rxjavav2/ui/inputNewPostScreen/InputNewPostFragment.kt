@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.home_task_l30_rxjavav2.App
 import com.example.home_task_l30_rxjavav2.R
 import com.example.home_task_l30_rxjavav2.databinding.InputNewPostFragmentBinding
 import com.example.home_task_l30_rxjavav2.hideKeyboard
 import com.example.home_task_l30_rxjavav2.ui.mainActivity.BaseFragment
-import com.example.home_task_l30_rxjavav2.ui.showPostsScreen.PostsScreenFragment
 import javax.inject.Inject
 
 class InputNewPostFragment : BaseFragment(R.layout.input_new_post_fragment) {
@@ -45,7 +43,6 @@ class InputNewPostFragment : BaseFragment(R.layout.input_new_post_fragment) {
                 binding.etTitle.text.toString(),
                 binding.etBody.text.toString()
             )
-
         }
     }
 
