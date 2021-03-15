@@ -11,7 +11,6 @@ class DomainToUiMapper @Inject constructor(private val resourceRepository: Resou
     fun map(domainListModel: List<PostDomainModel>): List<PostUiModel> {
         return domainListModel.let(this::getPostUiModels)
     }
-
     private fun getPostUiModels(postDomainModel: List<PostDomainModel>): List<PostUiModel> {
         return postDomainModel.map {
             when (it.userState) {
