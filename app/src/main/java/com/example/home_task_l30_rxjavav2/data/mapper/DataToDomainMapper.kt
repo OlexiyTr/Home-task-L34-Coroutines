@@ -6,11 +6,13 @@ import com.example.home_task_l30_rxjavav2.domain.model.PostDomainModel
 import com.example.home_task_l30_rxjavav2.datasource.UserStateConditions
 import javax.inject.Inject
 
-class DataToDomainMapper @Inject constructor() {
+class DataToDomainMapper @Inject constructor(
+    private val userStateConditions: UserStateConditions
+) {
 
 
     fun map(responses: List<PostData>?): List<PostDomainModel>? {
-        val blackList = UserStateConditions().getBlackList()
+        val blackList = userStateConditions.getBlackList()
         return responses.let { posts ->
             posts?.map { post ->
                 val userState: UserState? = blackList

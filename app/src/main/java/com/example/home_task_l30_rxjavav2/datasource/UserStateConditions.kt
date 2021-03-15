@@ -2,8 +2,9 @@ package com.example.home_task_l30_rxjavav2.datasource
 
 import com.example.home_task_l30_rxjavav2.domain.UserState
 import com.example.home_task_l30_rxjavav2.data.BadUserModel
+import javax.inject.Inject
 
-class UserStateConditions {
+class UserStateConditions @Inject constructor(){
 
     companion object {
         private const val WARNINGS_USER = 3

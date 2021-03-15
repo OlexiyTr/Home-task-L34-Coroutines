@@ -24,7 +24,7 @@ class PostsScreenViewModel @Inject constructor(
     fun getPosts() {
         viewModelScope.launch(Dispatchers.IO) {
             val listPostsUiModel = allPostsUseCase.getPosts()?.let { domainToUiMapper.map(it) }
-            _postsLiveData.postValue(listPostsUiModel)
+            _postsLiveData.postValue(listPostsUiModel!!)
         }
     }
 

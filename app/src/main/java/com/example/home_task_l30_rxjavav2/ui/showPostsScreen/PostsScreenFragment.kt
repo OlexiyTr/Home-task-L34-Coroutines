@@ -12,15 +12,16 @@ import com.example.home_task_l30_rxjavav2.databinding.PostsFragmentBinding
 import com.example.home_task_l30_rxjavav2.ui.showPostsScreen.adapter.PostsAdapter
 import com.example.home_task_l30_rxjavav2.ui.PostUiModel
 import com.example.home_task_l30_rxjavav2.ui.inputNewPostScreen.InputNewPostFragment
+import com.example.home_task_l30_rxjavav2.ui.mainActivity.BaseFragment
 import javax.inject.Inject
 
-class PostsScreenFragment : Fragment() {
+class PostsScreenFragment :  BaseFragment(R.layout.posts_fragment) {
 
     @Inject
     lateinit var screenViewModel: PostsScreenViewModel
 
     private lateinit var binding: PostsFragmentBinding
-    val postRecycleViewAdapter = PostsAdapter()
+    private val postRecycleViewAdapter = PostsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +33,7 @@ class PostsScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding = PostsFragmentBinding.bind(view)
         setupDi()
         observeLiveData()
         setupListeners()
@@ -77,10 +78,7 @@ class PostsScreenFragment : Fragment() {
     }
 
     private fun startAddNewPostFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.main_fragment, InputNewPostFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
+        navigation.showAddPostFragment()
     }
 
     companion object {

@@ -1,5 +1,7 @@
 package com.example.home_task_l30_rxjavav2.domain.useCases
 
+import com.example.home_task_l30_rxjavav2.R
+import com.example.home_task_l30_rxjavav2.data.repository.ResourceRepository
 import com.example.home_task_l30_rxjavav2.domain.ConstantsForCheckError.Companion.BODY_MAX_LENGTH
 import com.example.home_task_l30_rxjavav2.domain.ConstantsForCheckError.Companion.BODY_MIN_LENGTH
 import com.example.home_task_l30_rxjavav2.domain.ConstantsForCheckError.Companion.TITLE_MAX_LENGTH
@@ -9,7 +11,8 @@ import com.example.home_task_l30_rxjavav2.domain.model.NewPostModel
 import javax.inject.Inject
 
 class ValidationUseCase @Inject constructor(
-    private val savePostUseCase: SavePostUseCase
+    private val savePostUseCase: SavePostUseCase,
+    private val resourceRepository: ResourceRepository
 ) {
     suspend fun validate(postForSaving: NewPostModel): Set<NewPostErrorType> {
         val errors: MutableSet<NewPostErrorType> = mutableSetOf()
@@ -36,7 +39,11 @@ class ValidationUseCase @Inject constructor(
     }
 
     private fun checkBadWords(title: String): Boolean {
-        val badWords = setOf("реклама", "куплю", "товар")
+        val badWords = setOf(
+            resourceRepository.getString(R.string.bad_word_buy),
+            resourceRepository.getString(R.string.bad_word_adv),
+            resourceRepository.getString(R.string.bad_word_product)
+        )
         val badRegex = badWords.joinToString(prefix = "(?i)", separator = "|").toRegex()
         if (title.contains(badRegex)) {
             return true

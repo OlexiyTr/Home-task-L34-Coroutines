@@ -9,7 +9,7 @@ class GetPostsUseCase @Inject constructor(
     private val postRepository: PostsInfoRepository,
 ) {
     suspend fun getPosts(): List<PostDomainModel>? {
-        val postsGroupedByAddedFrom = postRepository.getPostsFromLocalStorage()?.groupBy { it.addedFrom }
+        val postsGroupedByAddedFrom = postRepository.getPostsFromLocalStorage()?.groupBy { it.addedFrom }?.withDefault { emptyList() }
         val listFromServer = postsGroupedByAddedFrom?.getValue(AddedFrom.SERVER)?.sortedBy{ it.id }
         val listFromUser = postsGroupedByAddedFrom?.getValue(AddedFrom.USER)?.sortedByDescending { it.id }
         return listFromUser?.plus(listFromServer!!)
